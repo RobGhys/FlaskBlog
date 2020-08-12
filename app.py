@@ -5,9 +5,7 @@ import secrets
 
 
 app = Flask(__name__) # Name of the module
-key = secrets.token_hex(16)
-app.config['SECRET_KEY'] = str(key)
-#'5791628bb0b13ce0c676dfde280ba245'
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 
 posts = [
