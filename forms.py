@@ -20,9 +20,10 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    # Only validates input if i) not empty, ii) correct address email
+    # Use email as the login form instead of user name
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
+    # Using secure cookie, enables the user logs to be remembered
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
