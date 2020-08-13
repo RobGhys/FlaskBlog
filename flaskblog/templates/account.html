@@ -2,5 +2,69 @@
 {% extends 'layout.html' %}
 <! -- Section specific to 'about.html' -->
 {% block content %}
-    <h1>{{ current_user.username }}</h1>
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ current_user.username }}</h2>
+          <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+        <! -- When form is POSTed, program continues on the same route because of ' action="" ' -->
+        <form method="POST" action="" enctype="multipart/form-data">
+            <! -- Adds CSRF (Cross-side request forgery) token
+                  Allows for security -->
+            {{ form.hidden_tag() }}
+            <! -- 'form-group' is created by Bootstrap -->
+            <fieldset class="form-group">
+                <! -- mb-4 : margin bottom, with a value of 4 -->
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    <! -- Prints label from username field. Uses Bootstrap -->
+                    {{ form.username.label(class="form-control-label") }}
+
+                    <! -- Error during user input phase -->
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <! -- No need to use /br, as we are un feedback move -->
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <! -- Need to add /br (i.e. break), given that this is a file -->
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <! -- Blue outline button -->
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
 {% endblock content %}
