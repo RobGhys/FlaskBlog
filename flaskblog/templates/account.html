@@ -1,6 +1,6 @@
-<! -- Uses pattern from 'layout.html' -->
+<!-- Uses pattern from 'layout.html' -->
 {% extends 'layout.html' %}
-<! -- Section specific to 'about.html' -->
+<!-- Section specific to 'about.html' -->
 {% block content %}
     <div class="content-section">
       <div class="media">
@@ -11,20 +11,20 @@
         </div>
       </div>
       <!-- FORM HERE -->
-        <! -- When form is POSTed, program continues on the same route because of ' action="" ' -->
+        <!-- When form is POSTed, program continues on the same route because of ' action="" ' -->
         <form method="POST" action="" enctype="multipart/form-data">
-            <! -- Adds CSRF (Cross-side request forgery) token
+            <!-- Adds CSRF (Cross-side request forgery) token
                   Allows for security -->
             {{ form.hidden_tag() }}
-            <! -- 'form-group' is created by Bootstrap -->
+            <!-- 'form-group' is created by Bootstrap -->
             <fieldset class="form-group">
-                <! -- mb-4 : margin bottom, with a value of 4 -->
+                <!-- mb-4 : margin bottom, with a value of 4 -->
                 <legend class="border-bottom mb-4">Account Info</legend>
                 <div class="form-group">
-                    <! -- Prints label from username field. Uses Bootstrap -->
+                    <!-- Prints label from username field. Uses Bootstrap -->
                     {{ form.username.label(class="form-control-label") }}
 
-                    <! -- Error during user input phase -->
+                    <!-- Error during user input phase -->
                     {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -42,7 +42,7 @@
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
-                                <! -- No need to use /br, as we are un feedback move -->
+                                <! -- No need to use /br, as we are un feedback mode -->
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>

@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-    <! -- Uses class from 'main.css' file -->
+    <!-- Uses class from 'main.css' file -->
     <div class="content-section">
-        <! -- When form is POSTed, program continues on the same route because of ' action="" ' -->
+        <!-- When form is POSTed, program continues on the same route because of ' action="" ' -->
         <form method="POST" action="">
-            <! -- Adds CSRF (Cross-side request forgery) token
+            <!-- Adds CSRF (Cross-side request forgery) token
                   Allows for security -->
             {{ form.hidden_tag() }}
-            <! -- 'form-group' is created by Bootstrap -->
+            <!-- 'form-group' is created by Bootstrap -->
             <fieldset class="form-group">
-                <! -- mb-4 : margin bottom, with a value of 4 -->
+                <!-- mb-4 : margin bottom, with a value of 4 -->
                 <legend class="border-bottom mb-4">Join Today</legend>
                 <div class="form-group">
-                    <! -- Prints label from username field. Uses Bootstrap -->
+                    <!-- Prints label from username field. Uses Bootstrap -->
                     {{ form.username.label(class="form-control-label") }}
 
-                    <! -- Error during user input phase -->
+                    <!-- Error during user input phase -->
                     {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -68,16 +68,16 @@
                 </div>
             </fieldset>
             <div class="form-group">
-                <! -- Blue outline button -->
+                <!-- Blue outline button -->
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
     </div>
-    <! -- padding value of 3 -->
+    <!-- padding value of 3 -->
     <div class="border-top pt-3">
-        <! -- Faded-out text -->
+        <!-- Faded-out text -->
         <small class="text-muted">
-            <! --  '< a >' : Ancer tag; ml-2 : margin-left of 2 -->
+            <!--  '< a >' : Ancer tag; ml-2 : margin-left of 2 -->
             Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
         </small>
     </div>

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskblog.models import User
 
@@ -21,14 +21,12 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
-
     def validate_username(self, username):
         # Returns the user name if it exists, or returns None if it doesn't exist
         user = User.query.filter_by(username=username.data).first()
         # Raise the error if the use is None
         if user:
             raise ValidationError('Username already taken. Please choose a different one.')
-
 
     def validate_email(self, email):
         # Returns the user name if it exists, or returns None if it doesn't exist
@@ -58,7 +56,6 @@ class UpdateAccountForm(FlaskForm):
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 
-
     def validate_username(self, username):
         # If the user changes username, returns the user name if it exists, or returns None if it doesn't exist
         if username.data != current_user.username:
@@ -67,7 +64,6 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('Username already taken. Please choose a different one.')
 
-
     def validate_email(self, email):
         # If the user changes email, returns the user email if it exists, or returns None if it doesn't exist
         if email.data != current_user.email:
@@ -75,4 +71,10 @@ class UpdateAccountForm(FlaskForm):
             # Raise the error if the use is None
             if user:
                 raise ValidationError('Email already taken. Please choose a different one.')
+
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
 
