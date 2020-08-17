@@ -53,7 +53,7 @@ class UpdateAccountForm(FlaskForm):
     # Only validates input if i) not empty, ii) correct address email
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
